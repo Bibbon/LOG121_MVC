@@ -40,12 +40,12 @@ public class MoveUpCommand implements ViewCommand{
 	}
 	
 	public void undo(){
-		
 		perspective.setVisibleImage(previousImage);
+		perspective.setTranslationY(perspective.getTranslationY() + TRANSLATION_FACTOR);
 	}
 	
 	public void redo(){
-		
 		perspective.setVisibleImage(resizedImage);
+		perspective.setTranslationY(perspective.getTranslationY() - TRANSLATION_FACTOR);
 	}
 }

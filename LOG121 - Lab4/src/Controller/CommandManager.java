@@ -5,14 +5,14 @@ import java.util.*;
 public class CommandManager {
 
 	private static CommandManager instance;
-	private List<ViewCommand> commandList;
-	private List<ViewCommand> redoList;
+	private List<ViewCommand> commandStack;
+	private List<ViewCommand> redoStack;
 	
 	private CommandManager(){
 
 		instance = null;
-		commandList = new ArrayList<ViewCommand>();
-		redoList = new ArrayList<ViewCommand>();
+		commandStack = new ArrayList<ViewCommand>();
+		redoStack = new ArrayList<ViewCommand>();
 
 	}
 	
@@ -26,27 +26,27 @@ public class CommandManager {
 	public void storeAndExecute(ViewCommand cmd){
 		
 		cmd.execute();
-		commandList.add(0, cmd);
-		redoList.clear();
+		commandStack.add(0, cmd);
+		redoStack.clear();
 		
 	}
 	
 	public void undo(){
 		
-		if(!commandList.isEmpty()){
-			ViewCommand cmd = commandList.remove(0);
+		if(!commandStack.isEmpty()){
+			ViewCommand cmd = commandStack.remove(0);
 			cmd.undo();
-			redoList.add(0, cmd);
+			redoStack.add(0, cmd);
 		}
 		
 	}
 	
 	public void redo(){
 		
-		if(!redoList.isEmpty()){
-			ViewCommand cmd = redoList.remove(0);
+		if(!redoStack.isEmpty()){
+			ViewCommand cmd = redoStack.remove(0);
 			cmd.redo();
-			commandList.add(0, cmd);
+			commandStack.add(0, cmd);
 		}
 		
 	}

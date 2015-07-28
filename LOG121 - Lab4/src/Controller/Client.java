@@ -123,6 +123,9 @@ public class Client {
 			case ("Undo"):
 				CommandManager.getInstance().undo();
 				break;
+			case ("Redo"):
+				CommandManager.getInstance().redo();
+				break;
 			case ("ZoomIn"):
 
 				if (viewSource == "P1") {
