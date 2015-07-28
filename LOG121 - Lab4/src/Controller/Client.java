@@ -4,11 +4,12 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-
-
+import javax.imageio.ImageIO;
 
 import Model.Perspective;
 import Model.Thumbnail;
@@ -20,9 +21,10 @@ public class Client {
 	private Perspective perspective2;
 	private Thumbnail mainImage;
 	private MainWindow mainWindow;
+	private ImageSelector imageSelector;
 
 	public Client() {
-		ImageSelector imageSelector = new ImageSelector();
+		imageSelector = new ImageSelector();
 		mainImage = new Thumbnail(imageSelector.getBufferedImage());
 		perspective1 = new Perspective(imageSelector.getBufferedImage());
 		perspective2 = new Perspective(imageSelector.getBufferedImage());
@@ -77,72 +79,99 @@ public class Client {
 
 			// Memorise the value of the click button
 			ButtonName = arg0.getActionCommand();
-			viewSource = (String) ((Component) arg0.getSource()).getParent().getParent().getName();
-			//If Direction button, need to go further
-			if(viewSource == null)
-				viewSource = (String) ((Component) arg0.getSource()).getParent().getParent().getParent().getName();
+
+			// If Direction button, need to go further
+			if (ButtonName == "Up" || ButtonName == "Down"
+					|| ButtonName == "Left" || ButtonName == "Right")
+				viewSource = (String) ((Component) arg0.getSource())
+						.getParent().getParent().getParent().getName();
+			else if (ButtonName == "ZoomIn" || ButtonName == "ZoomOut"
+					|| ButtonName == "Save")
+				viewSource = (String) ((Component) arg0.getSource())
+						.getParent().getParent().getName();
 
 			switch (ButtonName) {
 			case ("Open Image"):
 				ImageSelector iS = new ImageSelector();
 				mainImage.setImage(iS.getBufferedImage());
 				break;
+			case ("Save"):
+
+				imageSelector.SaveImage();
+				File imageOutput = imageSelector.getImageFile();
+
+				if (viewSource == "P1") {
+					try {
+						ImageIO.write(perspective1.getVisibleImage(), "png",
+								imageOutput);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else {
+					try {
+						ImageIO.write(perspective2.getVisibleImage(), "png",
+								imageOutput);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
 			case ("Undo"):
-				//CommandManager.getInstance().Undo();
-				System.out.println(ButtonName + " " + viewSource);
+				// CommandManager.getInstance().Undo();
+				System.out.println("Undo");
 				break;
 			case ("ZoomIn"):
 				/*
-				if(viewSource == "P1")
-					CommandManager.getInstance().zoomIn(perspective1);
-				else
-					CommandManager.getInstance().zoomIn(perspective2);
-					*/
-			    System.out.println(ButtonName + " " + viewSource);
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().zoomIn(perspective1); 
+				 * else
+				 * CommandManager.getInstance().zoomIn(perspective2);
+				 */
+				System.out.println(ButtonName + " " + viewSource);
 				break;
 			case ("ZoomOut"):
 				/*
-				if(viewSource == "P1")
-					CommandManager.getInstance().zoomIn(perspective1);
-				else
-					CommandManager.getInstance().zoomIn(perspective2);
-					*/
-			    System.out.println(ButtonName + " " + viewSource);
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().zoomIn(perspective1); 
+				 * else
+				 * CommandManager.getInstance().zoomIn(perspective2);
+				 */
+				System.out.println(ButtonName + " " + viewSource);
 				break;
 			case ("Up"):
 				/*
-				if(viewSource == "P1")
-				CommandManager.getInstance().move(perspective1, 0, 5);
-				else
-				CommandManager.getInstance().move(perspective2, 0, 5);
-				*/
-			    System.out.println(ButtonName + " " + viewSource);
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().move(perspective1, 0, 5); 
+				 * else
+				 * CommandManager.getInstance().move(perspective2, 0, 5);
+				 */
+				System.out.println(ButtonName + " " + viewSource);
 				break;
 			case ("Down"):
 				/*
-				if(viewSource == "P1")
-				CommandManager.getInstance().move(perspective1, 0, -5);
-				else
-				CommandManager.getInstance().move(perspective2, 0, -5);
-				*/
-			    System.out.println(ButtonName + " " + viewSource);
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().move(perspective1, 0, -5); 
+				 * else
+				 * CommandManager.getInstance().move(perspective2, 0, -5);
+				 */
+				System.out.println(ButtonName + " " + viewSource);
 				break;
 			case ("Right"):
 				/*
-				if(viewSource == "P1")
-				CommandManager.getInstance().move(perspective1, 5, 0);
-				else
-				CommandManager.getInstance().move(perspective2, 5, 0);
-				*/
-			    System.out.println(ButtonName + " " + viewSource);
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().move(perspective1, 5, 0); 
+				 * else
+				 * CommandManager.getInstance().move(perspective2, 5, 0);
+				 */
+				System.out.println(ButtonName + " " + viewSource);
 				break;
 			case ("Left"):
 				/*
-				if(viewSource == "P1")
-				CommandManager.getInstance().move(perspective1, -5, 0);
-				else
-				CommandManager.getInstance().move(perspective2, -5, 0);
-				*/
+				 * if(viewSource == "P1")
+				 * CommandManager.getInstance().move(perspective1, -5, 0); 
+				 * else
+				 * CommandManager.getInstance().move(perspective2, -5, 0);
+				 */
 				System.out.println(ButtonName + " " + viewSource);
 				break;
 

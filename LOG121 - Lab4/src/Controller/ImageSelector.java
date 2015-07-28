@@ -63,6 +63,11 @@ public class ImageSelector {
 		this.imageFile = imageChooser.getSelectedFile();
 	}
 	
+	public void SaveImage(){
+		imageChooser.showSaveDialog(null);
+		this.imageFile = imageChooser.getSelectedFile();
+	}
+	
 	public BufferedImage getBufferedImage(){
 		
 		BufferedImage img = null;

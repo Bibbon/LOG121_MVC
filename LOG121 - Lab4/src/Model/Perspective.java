@@ -29,6 +29,7 @@ public class Perspective extends Observable implements Observer{
 		this.visibleX2 = 0;
 		this.visibleY2 = 0;
 		this.fullImage = image;
+		this.visibleImage = image;
 	}
 	
 	
