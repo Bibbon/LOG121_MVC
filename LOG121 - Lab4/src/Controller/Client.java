@@ -121,8 +121,7 @@ public class Client {
 
 				}
 			case ("Undo"):
-				// CommandManager.getInstance().Undo();
-				System.out.println("Undo");
+				CommandManager.getInstance().undo();
 				break;
 			case ("ZoomIn"):
 
