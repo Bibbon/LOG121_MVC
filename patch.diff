@@ -1,0 +1,604 @@
+diff --git a/.classpath b/.classpath
+new file mode 100644
+index 0000000..a8b1ed8
+--- /dev/null
++++ b/.classpath
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<classpath>
++	<classpathentry kind="src" path="LOG121 - Lab4/src"/>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
++	<classpathentry kind="output" path="LOG121 - Lab4/bin"/>
++</classpath>
+diff --git a/.project b/.project
+new file mode 100644
+index 0000000..c7c6e9c
+--- /dev/null
++++ b/.project
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<projectDescription>
++	<name>LOG121_LAB4</name>
++	<comment></comment>
++	<projects>
++	</projects>
++	<buildSpec>
++		<buildCommand>
++			<name>org.eclipse.jdt.core.javabuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++	</buildSpec>
++	<natures>
++		<nature>org.eclipse.jdt.core.javanature</nature>
++	</natures>
++</projectDescription>
+diff --git a/LOG121 - Lab4/bin/.gitignore b/LOG121 - Lab4/bin/.gitignore
+index d1b2e82..0df1f40 100644
+--- a/LOG121 - Lab4/bin/.gitignore	
++++ b/LOG121 - Lab4/bin/.gitignore	
+@@ -1 +1,5 @@
++/.DS_Store
++/ApplicationPicture.class
+ /Controller/
++/Model/
++/View/
+diff --git a/LOG121 - Lab4/bin/ApplicationPicture.class b/LOG121 - Lab4/bin/ApplicationPicture.class
+deleted file mode 100644
+index 1b6a297..0000000
+Binary files a/LOG121 - Lab4/bin/ApplicationPicture.class and /dev/null differ
+diff --git a/LOG121 - Lab4/bin/Model/Perspective.class b/LOG121 - Lab4/bin/Model/Perspective.class
+index 6cee70d..14882fa 100644
+Binary files a/LOG121 - Lab4/bin/Model/Perspective.class and b/LOG121 - Lab4/bin/Model/Perspective.class differ
+diff --git a/LOG121 - Lab4/bin/View/MainImage$ListenerImage.class b/LOG121 - Lab4/bin/View/MainImage$ListenerImage.class
+deleted file mode 100644
+index 71009a0..0000000
+Binary files a/LOG121 - Lab4/bin/View/MainImage$ListenerImage.class and /dev/null differ
+diff --git a/LOG121 - Lab4/bin/View/MainImage.class b/LOG121 - Lab4/bin/View/MainImage.class
+deleted file mode 100644
+index cf03096..0000000
+Binary files a/LOG121 - Lab4/bin/View/MainImage.class and /dev/null differ
+diff --git a/LOG121 - Lab4/bin/View/MainWindow.class b/LOG121 - Lab4/bin/View/MainWindow.class
+index de66212..0249c55 100644
+Binary files a/LOG121 - Lab4/bin/View/MainWindow.class and b/LOG121 - Lab4/bin/View/MainWindow.class differ
+diff --git a/LOG121 - Lab4/bin/View/MenuWindow.class b/LOG121 - Lab4/bin/View/MenuWindow.class
+index ac21eb8..815be52 100644
+Binary files a/LOG121 - Lab4/bin/View/MenuWindow.class and b/LOG121 - Lab4/bin/View/MenuWindow.class differ
+diff --git a/LOG121 - Lab4/bin/View/Thumbnail$ListenerImage.class b/LOG121 - Lab4/bin/View/Thumbnail$ListenerImage.class
+index 7f58a57..fc94a4d 100644
+Binary files a/LOG121 - Lab4/bin/View/Thumbnail$ListenerImage.class and b/LOG121 - Lab4/bin/View/Thumbnail$ListenerImage.class differ
+diff --git a/LOG121 - Lab4/bin/View/Thumbnail.class b/LOG121 - Lab4/bin/View/Thumbnail.class
+index 7470b36..2bd9205 100644
+Binary files a/LOG121 - Lab4/bin/View/Thumbnail.class and b/LOG121 - Lab4/bin/View/Thumbnail.class differ
+diff --git a/LOG121 - Lab4/src/ApplicationPicture.java b/LOG121 - Lab4/src/ApplicationPicture.java
+deleted file mode 100644
+index c82b939..0000000
+--- a/LOG121 - Lab4/src/ApplicationPicture.java	
++++ /dev/null
+@@ -1,43 +0,0 @@
+-/******************************************************
+-Cours:  LOG121-02
+-Projet: laboratoire #1 - Affichage de formes
+-Nom du fichier: ApplicationFormes.java
+-Date cree 25 mai 2015
+-*******************************************************
+-Historique des modifications
+-*******************************************************
+-* @author Pierre-Luc Cusson
+-* @since 25 mai 2015
+-*******************************************************/  
+- 
+-
+-import java.beans.PropertyChangeEvent;
+-import java.beans.PropertyChangeListener;
+-
+-import View.MainWindow;
+-
+-/**
+- * Cette classe represente l'application dans son ensemble. 
+-* @author Pierre-Luc Cusson
+-* @since 15 juillet 2015
+- */
+-public class ApplicationPicture{
+-	
+-	/**
+-	 * main de l'application
+-	 * @param args
+-	 */
+-	public static void main(String[] args) {
+-		ApplicationPicture application = new ApplicationPicture();
+-	}
+-	
+-	/**
+-	 * Constructeur
+-	 */
+-	public ApplicationPicture(){
+-		MainWindow MainWindow = new MainWindow();
+-		//CommBase comm = new CommBase();
+-		//FenetrePrincipale fenetre = new FenetrePrincipale(comm);
+-		//comm.setPropertyChangeListener(fenetre);
+-	}
+-}
+diff --git a/LOG121 - Lab4/src/Controller/ImageSelector.java b/LOG121 - Lab4/src/Controller/ImageSelector.java
+index 1b729d7..83b5def 100644
+--- a/LOG121 - Lab4/src/Controller/ImageSelector.java	
++++ b/LOG121 - Lab4/src/Controller/ImageSelector.java	
+@@ -10,15 +10,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
+ 
+ public class ImageSelector {
+ 	
++	private static final String EXTENSION_TYPE = "Image Type";
++	private static final String JPG = "JPG";
++	private static final String JPEG = "JPEG";
++	private static final String PNG = "PNG";
++	
+ 	private JFileChooser imageChooser;
+ 	private FileNameExtensionFilter imageFilter;
+ 	private File imageFile;
+ 	
+ 	
+-	public ImageSelector(String filetype, String... extensions){
++	public ImageSelector(){
+ 		this.imageChooser = new JFileChooser();
+-		this.imageFilter = new FileNameExtensionFilter(filetype, extensions);
++		this.imageFilter = new FileNameExtensionFilter(EXTENSION_TYPE, JPG, JPEG, PNG);
+ 		this.imageChooser.setFileFilter(imageFilter);
++		SelectImage();
+ 	}
+ 
+ 
+@@ -59,7 +65,6 @@ public class ImageSelector {
+ 	
+ 	public BufferedImage getBufferedImage(){
+ 		
+-		SelectImage();
+ 		BufferedImage img = null;
+ 		
+ 		try {
+@@ -76,7 +81,6 @@ public class ImageSelector {
+ 	
+ 	public String getImagePath(){
+ 		
+-		SelectImage();
+ 		return imageFile.getAbsolutePath();
+ 		
+ 	}
+diff --git a/LOG121 - Lab4/src/Controller/MenuListener.java b/LOG121 - Lab4/src/Controller/MenuListener.java
+index a11f078..dc04828 100644
+--- a/LOG121 - Lab4/src/Controller/MenuListener.java	
++++ b/LOG121 - Lab4/src/Controller/MenuListener.java	
+@@ -13,7 +13,10 @@ public class MenuListener implements ActionListener  {
+ 		//Memorise the value of the click bouton
+ 		bouton = arg0.getActionCommand();
+ 
+-		if(bouton.equals("Open Image")){				
++		if(bouton.equals("Open Image")){
++			
++			ImageSelector IS = new ImageSelector();
++			IS.getBufferedImage();
+ 
+ 
+ 
+diff --git a/LOG121 - Lab4/src/Controller/PerspectiveListener.java b/LOG121 - Lab4/src/Controller/PerspectiveListener.java
+new file mode 100644
+index 0000000..0ab2b19
+--- /dev/null
++++ b/LOG121 - Lab4/src/Controller/PerspectiveListener.java	
+@@ -0,0 +1,80 @@
++package Controller;
++
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++
++
++
++public class PerspectiveListener implements ActionListener{
++
++
++
++
++	// Memorise the title of a bouton
++	private String bouton;
++
++	public void actionPerformed(ActionEvent arg0) {
++
++		//Memorise the value of the click bouton
++		bouton = arg0.getActionCommand();
++
++		if(bouton.equals("Up")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++			//test
++			System.out.println("Le bouton Up a ete appuyer");
++
++
++		}
++		else if(bouton.equals("Down")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++
++
++
++		}
++		else if(bouton.equals("Left")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++
++
++
++		}
++		else if(bouton.equals("Right")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++
++
++
++		}
++		else if(bouton.equals("Zoom In")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++
++
++
++		}
++		else if(bouton.equals("Zoom Out")){				
++
++
++
++			//APPELLE L ACTION QUI DOIT ETRE TRAITER DANS LE MODELE
++
++
++
++		}
++
++
++
++	} // END actionPerformed()
++}
+diff --git a/LOG121 - Lab4/src/Model/Client.java b/LOG121 - Lab4/src/Model/Client.java
+new file mode 100644
+index 0000000..06a0d6e
+--- /dev/null
++++ b/LOG121 - Lab4/src/Model/Client.java	
+@@ -0,0 +1,65 @@
++package Model;
++
++import View.MainWindow;
++import Controller.ImageSelector;
++
++
++
++public class Client {
++	
++	
++
++	private Perspective perspective1;
++	private Perspective perspective2;
++	private Thumbnail mainImage;
++	private MainWindow mainWindow;
++
++	
++	
++	public Client(){
++		ImageSelector imageSelector = new ImageSelector();
++		mainImage = new Thumbnail(imageSelector.getBufferedImage());
++		perspective1 = new Perspective(imageSelector.getBufferedImage());
++		perspective2 = new Perspective(imageSelector.getBufferedImage());
++		mainWindow = new MainWindow();
++		
++
++	}
++	
++	public Perspective getPerspective1() {
++		return perspective1;
++	}
++
++	public void setPerspective1(Perspective perspective1) {
++		this.perspective1 = perspective1;
++	}
++
++	public Perspective getPerspective2() {
++		return perspective2;
++	}
++
++	public void setPerspective2(Perspective perspective2) {
++		this.perspective2 = perspective2;
++	}
++
++	public Thumbnail getMainImage() {
++		return mainImage;
++	}
++
++	public void setMainImage(Thumbnail mainImage) {
++		this.mainImage = mainImage;
++	}
++
++	
++	
++	
++	
++	
++	public static void main(String [] args){
++		Client client = new Client();
++		
++	}
++
++
++
++}
+diff --git a/LOG121 - Lab4/src/Model/Perspective.java b/LOG121 - Lab4/src/Model/Perspective.java
+index f3719fc..4a24a34 100644
+--- a/LOG121 - Lab4/src/Model/Perspective.java	
++++ b/LOG121 - Lab4/src/Model/Perspective.java	
+@@ -45,8 +45,11 @@ public class Perspective extends Observable{
+ 		this.topLeftCorner.y = (minY >= 0) ? minY: 0;
+ 		this.bottomRightCorner.x = (maxX <= width) ? maxX: width;
+ 		this.bottomRightCorner.y = (maxY <= height) ? maxY: height;
++		setChanged();
++		notifyObservers();
+ 		
+ 		
+ 	}
+ 	
++	
+ }
+diff --git a/LOG121 - Lab4/src/Model/Thumbnail.java b/LOG121 - Lab4/src/Model/Thumbnail.java
+new file mode 100644
+index 0000000..a6d79b3
+--- /dev/null
++++ b/LOG121 - Lab4/src/Model/Thumbnail.java	
+@@ -0,0 +1,26 @@
++package Model;
++
++import java.awt.image.BufferedImage;
++import java.util.Observable;
++
++public class Thumbnail extends Observable{
++	private BufferedImage image;
++	
++	
++	
++	
++	public Thumbnail(BufferedImage image){
++		this.image = image;
++	}
++
++	public BufferedImage getImage() {
++		return image;
++	}
++
++	public void setImage(BufferedImage image) {
++		this.image = image;
++		setChanged();
++		notifyObservers();
++	}
++
++}
+diff --git a/LOG121 - Lab4/src/View/ImagePanel.java b/LOG121 - Lab4/src/View/ImagePanel.java
+new file mode 100644
+index 0000000..a654303
+--- /dev/null
++++ b/LOG121 - Lab4/src/View/ImagePanel.java	
+@@ -0,0 +1,55 @@
++package View;
++
++import java.awt.BorderLayout;
++import java.awt.Color;
++import java.awt.Dimension;
++import java.awt.event.ActionEvent;
++import java.awt.event.ActionListener;
++
++import javax.swing.ImageIcon;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++
++
++
++public class ImagePanel extends JPanel{
++
++	private JPanel panelImage = new JPanel();
++	
++	/*
++	 * constructor
++	 */
++	public ImagePanel(){
++		super();
++		initMainImage();
++	}
++	
++	
++	
++	private void initMainImage() {
++		
++		setBackground(Color.BLUE);
++		//panelImage.setPreferredSize(new Dimension(640, 480));
++
++		ImageIcon image = new ImageIcon("image/pic1");
++		JLabel imageLabel = new JLabel("", image, JLabel.CENTER);
++		
++		panelImage.add( imageLabel, BorderLayout.CENTER );
++		
++		add(panelImage);
++		
++	}
++
++
++
++	
++	
++	private class ListenerImage implements ActionListener {
++
++		public void actionPerformed(ActionEvent arg0) {
++			
++		}
++		
++	}
++
++}
+diff --git a/LOG121 - Lab4/src/View/MainWindow.java b/LOG121 - Lab4/src/View/MainWindow.java
+index 558a7f6..726e0b6 100644
+--- a/LOG121 - Lab4/src/View/MainWindow.java	
++++ b/LOG121 - Lab4/src/View/MainWindow.java	
+@@ -13,15 +13,16 @@ import javax.swing.JOptionPane;
+ 
+ public class MainWindow extends JFrame
+ {
++	
++	
+ 
+ 	public MainWindow()
+ 	{	
+ 		setLayout(new BorderLayout());
+ 		
+ 		MenuWindow menu = new MenuWindow();
+-		add(menu, BorderLayout.NORTH); 
+-		
+-		MainImage mainImage = new MainImage();
++		add(menu, BorderLayout.NORTH);
++		ImagePanel mainImage = new ImagePanel();
+ 		add(mainImage, BorderLayout.CENTER);
+ 		
+ 		Thumbnail subImage = new Thumbnail();
+diff --git a/LOG121 - Lab4/src/View/MenuWindow.java b/LOG121 - Lab4/src/View/MenuWindow.java
+index bfd42db..6375682 100644
+--- a/LOG121 - Lab4/src/View/MenuWindow.java	
++++ b/LOG121 - Lab4/src/View/MenuWindow.java	
+@@ -8,8 +8,6 @@ import javax.swing.JMenu;
+ import javax.swing.JMenuBar;
+ import javax.swing.JMenuItem;
+ 
+-import Controller.MenuListener;
+-
+ public class MenuWindow extends JMenuBar
+ {
+ 
+@@ -68,4 +66,17 @@ public class MenuWindow extends JMenuBar
+ 		
+ 	}
+ 
++	
++	/**
++	 * Listener for the buttons
++	 */
++	private class MenuListener implements ActionListener {
++
++		public void actionPerformed(ActionEvent arg0) {
++
++
++
++
++		}
++	}
+ }
+\ No newline at end of file
+diff --git a/LOG121 - Lab4/src/View/Thumbnail.java b/LOG121 - Lab4/src/View/Thumbnail.java
+index 6f1b598..21cc204 100644
+--- a/LOG121 - Lab4/src/View/Thumbnail.java	
++++ b/LOG121 - Lab4/src/View/Thumbnail.java	
+@@ -16,7 +16,7 @@ import javax.swing.JPanel;
+ import javax.swing.JTextField;
+ 
+ public class Thumbnail extends JPanel{
+-
++	
+ 	private static final int TEXT_LENGHT = 4;
+ 
+ 	//private JPanel panelImage = new JPanel();
+@@ -27,14 +27,14 @@ public class Thumbnail extends JPanel{
+ 	public Thumbnail(){
+ 		initThumbnail();
+ 	}
+-
++	
+ 
+ 	private void initThumbnail() {
+ 		add(addThumbnail());
+ 		add(addThumbnail());
+-		//add(addThumbnail());
++		add(addThumbnail());
+ 	}
+-
++	
+ 	private Component addThumbnail() {
+ 
+ 		JPanel panelThumbnail = new JPanel();
+@@ -43,11 +43,11 @@ public class Thumbnail extends JPanel{
+ 		panelThumbnail.setLayout(new BorderLayout());
+ 
+ 		panelThumbnail.add(addThumbnailParameter(), BorderLayout.NORTH);
+-		ImageIcon image = new ImageIcon("image/pic1.jpg");
++		ImageIcon image = new ImageIcon("image/pic1");
+ 		JLabel imageLabel = new JLabel("", image, JLabel.CENTER);
+ 		panelThumbnail.add(imageLabel, BorderLayout.CENTER);
+ 		panelThumbnail.add(addThumbnailZoom(), BorderLayout.EAST);
+-
++		
+ 		return add(panelThumbnail);
+ 
+ 	}
+@@ -55,7 +55,7 @@ public class Thumbnail extends JPanel{
+ 	private Component addThumbnailParameter(){
+ 
+ 		JPanel panelThumbnailParameter = new JPanel();
+-
++		
+ 		//add initial position field
+ 		JLabel labelPosition = new JLabel("Position (X;Y):");
+ 		panelThumbnailParameter.add(labelPosition, BorderLayout.NORTH);
+@@ -64,12 +64,6 @@ public class Thumbnail extends JPanel{
+ 		JTextField posY = new JTextField(TEXT_LENGHT);
+ 		panelThumbnailParameter.add(posY, BorderLayout.NORTH);
+ 
+-		//add zoomRation field
+-		JLabel labelZoomRatio = new JLabel("Zoom Ratio:");
+-		panelThumbnailParameter.add(labelZoomRatio, BorderLayout.NORTH);
+-		JTextField zoomRatio = new JTextField(TEXT_LENGHT);
+-		panelThumbnailParameter.add(zoomRatio, BorderLayout.NORTH);
+-/*
+ 		//add width field
+ 		JLabel labelWidth = new JLabel("Width:");
+ 		panelThumbnailParameter.add(labelWidth, BorderLayout.NORTH);
+@@ -81,7 +75,7 @@ public class Thumbnail extends JPanel{
+ 		panelThumbnailParameter.add(labelHeight, BorderLayout.NORTH);
+ 		JTextField height = new JTextField(TEXT_LENGHT);
+ 		panelThumbnailParameter.add(height, BorderLayout.NORTH);
+-*/
++		
+ 		JButton close = new JButton("X");
+ 		panelThumbnailParameter.add(close);
+ 
+@@ -89,19 +83,19 @@ public class Thumbnail extends JPanel{
+ 
+ 		return panelThumbnailParameter;
+ 	} 
+-
++	
+ 	private Component addThumbnailZoom(){
+ 		JPanel panelThumbnailZoom = new JPanel();
+-
++		
+ 		panelThumbnailZoom.setLayout(new BoxLayout(panelThumbnailZoom ,BoxLayout.PAGE_AXIS));
+ 		//panelThumbnailZoom.setLayout(new BorderLayout());
+-
++		
+ 		JButton zoomIn = new JButton("+");
+ 		panelThumbnailZoom.add(zoomIn);
+-
++		
+ 		JButton zoomOut = new JButton("-");
+ 		panelThumbnailZoom.add(zoomOut);
+-
++		
+ 		return panelThumbnailZoom;
+ 	}
+ 
