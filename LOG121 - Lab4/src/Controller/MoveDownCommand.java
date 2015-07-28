@@ -45,4 +45,9 @@ public class MoveDownCommand implements ViewCommand{
 		
 		perspective.setVisibleImage(previousImage);
 	}
+	
+	public void redo(){
+		
+		perspective.setVisibleImage(resizedImage);
+	}
 }

@@ -10,8 +10,6 @@ public class MoveUpCommand implements ViewCommand{
 
 	private Perspective perspective;
 	
-
-
 	private int newImageWidth;
 	private int newImageHeight;
 	 
@@ -44,5 +42,10 @@ public class MoveUpCommand implements ViewCommand{
 	public void undo(){
 		
 		perspective.setVisibleImage(previousImage);
+	}
+	
+	public void redo(){
+		
+		perspective.setVisibleImage(resizedImage);
 	}
 }

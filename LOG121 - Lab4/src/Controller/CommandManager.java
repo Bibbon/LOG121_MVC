@@ -2,18 +2,17 @@ package Controller;
 
 import java.util.*;
 
-import Model.Perspective;
-import Model.Thumbnail;
-
 public class CommandManager {
 
 	private static CommandManager instance;
-	private List<ViewCommand> history;
+	private List<ViewCommand> commandList;
+	private List<ViewCommand> redoList;
 	
 	private CommandManager(){
 
 		instance = null;
-		history = new ArrayList<ViewCommand>();
+		commandList = new ArrayList<ViewCommand>();
+		redoList = new ArrayList<ViewCommand>();
 
 	}
 	
@@ -24,44 +23,32 @@ public class CommandManager {
 		return instance;
 	}
 	
-	private void storeAndExecute(ViewCommand cmd){
-		this.history.add(cmd);
+	public void storeAndExecute(ViewCommand cmd){
+		
 		cmd.execute();
+		commandList.add(0, cmd);
+		redoList.clear();
+		
 	}
 	
-	private ViewCommand getLastCommand (){
-		return this.history.get(history.size() - 1);
+	public void undo(){
+		
+		if(!commandList.isEmpty()){
+			ViewCommand cmd = commandList.remove(0);
+			cmd.undo();
+			redoList.add(0, cmd);
+		}
+		
 	}
 	
-	private ViewCommand removeLastCommand (){
-		return this.history.remove(history.size() - 1);
-	}
-	
-
-	
-	public void zoomIn(Perspective perspective){
-		storeAndExecute(new ZoomInCommand(perspective));
-	}
-	
-	
-	public void zoomOut(Perspective perspective){
-		storeAndExecute(new ZoomOutCommand(perspective));
-	}
-	
-	
-	public void moveUp(Perspective perspective){
-		storeAndExecute(new MoveUpCommand(perspective));
-	}
-	
-	public void moveDown(Perspective perspective){
-		storeAndExecute(new MoveDownCommand(perspective));
-	}
-	
-	public void moveLeft(Perspective perspective){
-		storeAndExecute(new MoveLeftCommand(perspective));
-	}
-	
-	public void moveRight(Perspective perspective){
-		storeAndExecute(new MoveRightCommand(perspective));
+	public void redo(){
+		
+		if(!redoList.isEmpty()){
+			ViewCommand cmd = redoList.remove(0);
+			cmd.redo();
+			commandList.add(0, cmd);
+		}
+		
 	}
 }
+

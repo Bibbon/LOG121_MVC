@@ -44,4 +44,9 @@ public class ZoomInCommand implements ViewCommand{
 		
 		perspective.setVisibleImage(previousImage);
 	}
+	
+	public void redo(){
+		
+		perspective.setVisibleImage(resizedImage);
+	}
 }
