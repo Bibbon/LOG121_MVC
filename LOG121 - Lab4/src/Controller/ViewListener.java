@@ -63,7 +63,6 @@ public class ViewListener implements ActionListener  {
 		else if(bouton.equals("ZoomOut")){	
 			
 			System.out.println("Zoom out");
-			CommandManager.getInstance().zoomIn(perspective);
 
 
 
