@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
-public class Perspective extends Observable{
+public class Perspective extends Observable implements Observer{
 
 	private int fullHeight;
 	private int fullWidth;
@@ -78,6 +78,19 @@ public class Perspective extends Observable{
 	public void setVisibleY2(int visibleY2) {
 		this.visibleY2 = visibleY2;
 	}
+	
+	
+	public BufferedImage getVisibleImage() {
+		return visibleImage;
+	}
+
+
+
+	public void setVisibleImage(BufferedImage visibleImage) {
+		this.visibleImage = visibleImage;
+		setChanged();
+		notifyObservers(this.visibleImage);
+	}
 
 
 
@@ -88,13 +101,21 @@ public class Perspective extends Observable{
 		this.visibleX2 = (maxX <= fullWidth) ? maxX: fullWidth;
 		this.visibleY2 = (maxY <= fullHeight) ? maxY: fullHeight;
 		
-		visibleImage = fullImage.getSubimage(minX, minY, maxX - minX, maxY - minY);
-		
-		setChanged();
-		notifyObservers(visibleImage);
-		
+		setVisibleImage(fullImage.getSubimage(minX, minY, maxX - minX, maxY - minY));	
 		
 	}
+
+
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		setVisibleImage((BufferedImage) arg1);
+		
+	}
+
+
+
+
 	
 	
 }

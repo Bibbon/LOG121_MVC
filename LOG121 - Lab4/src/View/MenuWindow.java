@@ -8,7 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import Controller.ViewListener;
+import Controller.Client.ViewListener;
 
 public class MenuWindow extends JMenuBar
 {
@@ -27,12 +27,12 @@ public class MenuWindow extends JMenuBar
 	JMenuItem actionUndo = new JMenuItem("Undo");
 	JMenuItem actionRedo = new JMenuItem("Redo");
 	
-	private ViewListener viewListener;
+	private Controller.Client.ViewListener viewListener;
 		
 
-	public MenuWindow(){
+	public MenuWindow(ViewListener viewListener){
 
-		initMenu();
+		initMenu(viewListener);
 
 	}
 
@@ -40,9 +40,9 @@ public class MenuWindow extends JMenuBar
 	/**
 	 * Initialise Menu
 	 */
-	private void initMenu(){
+	private void initMenu(ViewListener viewListener){
 
-        viewListener = new ViewListener();
+        this.viewListener = viewListener;
 		fileOpenImage.addActionListener(viewListener);
 		menuFile.add(fileOpenImage);
 		fileOpenProject.addActionListener(viewListener);

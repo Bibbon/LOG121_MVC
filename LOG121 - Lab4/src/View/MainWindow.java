@@ -10,6 +10,9 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import Controller.Client.ViewListener;
+
  
 
 public class MainWindow extends JFrame
@@ -19,12 +22,12 @@ public class MainWindow extends JFrame
 
 	
 
-	public MainWindow(BufferedImage image)
+	public MainWindow(BufferedImage image, ViewListener viewListener)
 	{	
 		setLayout(new BorderLayout());
-		menu = new MenuWindow();
+		menu = new MenuWindow(viewListener);
 		add(menu, BorderLayout.NORTH);
-		mainPanel = new MainPanel(image);
+		mainPanel = new MainPanel(image, viewListener);
 		add(mainPanel, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();

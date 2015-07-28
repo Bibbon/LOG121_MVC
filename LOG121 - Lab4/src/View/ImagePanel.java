@@ -32,9 +32,9 @@ public class ImagePanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
+		remove(imageLabel);
 		this.image = new ImageIcon((BufferedImage)arg1);
 		this.imageLabel = new JLabel("", this.image, JLabel.CENTER);
-		removeAll();
 		add(imageLabel, BorderLayout.CENTER);
 		validate();
 		repaint();
