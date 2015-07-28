@@ -63,7 +63,8 @@ public class Client {
 	
 	public static void main(String [] args){
 		Client client = new Client();
-		
+		ImageSelector iS = new ImageSelector();
+		client.getMainImage().setImage(iS.getBufferedImage());
 		
 	}
 
