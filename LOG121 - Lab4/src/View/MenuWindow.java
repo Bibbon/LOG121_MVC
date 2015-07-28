@@ -26,6 +26,8 @@ public class MenuWindow extends JMenuBar
 	JMenuItem actionNewThumbnail = new JMenuItem("New Thumbnail");
 	JMenuItem actionUndo = new JMenuItem("Undo");
 	JMenuItem actionRedo = new JMenuItem("Redo");
+	
+	private ViewListener viewListener;
 		
 
 	public MenuWindow(){
@@ -40,7 +42,7 @@ public class MenuWindow extends JMenuBar
 	 */
 	private void initMenu(){
 
-        ViewListener viewListener = new ViewListener();
+        viewListener = new ViewListener();
 		fileOpenImage.addActionListener(viewListener);
 		menuFile.add(fileOpenImage);
 		fileOpenProject.addActionListener(viewListener);
@@ -57,6 +59,16 @@ public class MenuWindow extends JMenuBar
 		add(menuAction);
 
 		
+	}
+
+
+	public ViewListener getViewListener() {
+		return viewListener;
+	}
+
+
+	public void setViewListener(ViewListener viewListener) {
+		this.viewListener = viewListener;
 	}
 
 	

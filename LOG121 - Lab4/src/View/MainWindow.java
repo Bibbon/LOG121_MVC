@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class MainWindow extends JFrame
 {
 	private MainPanel mainPanel;
-	MenuWindow menu;
+	private MenuWindow menu;
 
 	
 
@@ -30,6 +30,30 @@ public class MainWindow extends JFrame
 		pack();
 		setVisible(true);
 		
+	}
+
+
+
+	public MainPanel getMainPanel() {
+		return mainPanel;
+	}
+
+
+
+	public void setMainPanel(MainPanel mainPanel) {
+		this.mainPanel = mainPanel;
+	}
+
+
+
+	public MenuWindow getMenu() {
+		return menu;
+	}
+
+
+
+	public void setMenu(MenuWindow menu) {
+		this.menu = menu;
 	}
 	
 }

@@ -2,11 +2,15 @@ package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.Observable;
 
 public class ViewListener implements ActionListener  {
 
 	// Memorise the title of a bouton
 	private String bouton;
+	private BufferedImage image;
+
 
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -16,7 +20,7 @@ public class ViewListener implements ActionListener  {
 		if(bouton.equals("Open Image")){
 			
 			ImageSelector IS = new ImageSelector();
-			IS.getBufferedImage();
+			this.image = IS.getBufferedImage();
 
 
 
@@ -59,6 +63,7 @@ public class ViewListener implements ActionListener  {
 		else if(bouton.equals("ZoomOut")){	
 			
 			System.out.println("Zoom out");
+			CommandManager.getInstance().zoomIn(perspective);
 
 
 

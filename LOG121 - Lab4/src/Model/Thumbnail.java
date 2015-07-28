@@ -20,7 +20,7 @@ public class Thumbnail extends Observable{
 	public void setImage(BufferedImage image) {
 		this.image = image;
 		setChanged();
-		notifyObservers();
+		notifyObservers(image);
 	}
 
 }

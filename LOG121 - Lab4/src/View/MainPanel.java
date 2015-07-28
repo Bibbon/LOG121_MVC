@@ -36,5 +36,29 @@ public class MainPanel extends JPanel{
 		add(PerspectiveView2, BorderLayout.LINE_END);
 		add(ThumbnailView, BorderLayout.PAGE_START);
 	}
+
+	public ImagePanel getPerspectiveView1() {
+		return PerspectiveView1;
+	}
+
+	public void setPerspectiveView1(ImagePanel perspectiveView1) {
+		PerspectiveView1 = perspectiveView1;
+	}
+
+	public ImagePanel getPerspectiveView2() {
+		return PerspectiveView2;
+	}
+
+	public void setPerspectiveView2(ImagePanel perspectiveView2) {
+		PerspectiveView2 = perspectiveView2;
+	}
+
+	public ImagePanel getThumbnailView() {
+		return ThumbnailView;
+	}
+
+	public void setThumbnailView(ImagePanel thumbnailView) {
+		ThumbnailView = thumbnailView;
+	}
 	
 }

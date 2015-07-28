@@ -47,4 +47,12 @@ public class ButtonPanel extends JPanel{
 		
 	}
 
+	public ViewListener getViewListener() {
+		return viewListener;
+	}
+
+	public void setViewListener(ViewListener viewListener) {
+		this.viewListener = viewListener;
+	}
+
 }

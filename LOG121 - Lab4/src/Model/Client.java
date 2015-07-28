@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import View.MainWindow;
 import Controller.ImageSelector;
 
@@ -22,6 +25,10 @@ public class Client {
 		perspective1 = new Perspective(imageSelector.getBufferedImage());
 		perspective2 = new Perspective(imageSelector.getBufferedImage());
 		mainWindow = new MainWindow(imageSelector.getBufferedImage());
+		perspective1.addObserver(mainWindow.getMainPanel().getPerspectiveView1());
+		perspective2.addObserver(mainWindow.getMainPanel().getPerspectiveView2());
+		mainImage.addObserver(mainWindow.getMainPanel().getThumbnailView());
+		
 	
 	}
 	
@@ -59,6 +66,8 @@ public class Client {
 		
 		
 	}
+
+
 
 
 

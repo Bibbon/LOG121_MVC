@@ -3,13 +3,15 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel implements Observer {
 	
 	private ImageIcon image;
 	private JLabel imageLabel;
@@ -20,6 +22,14 @@ public class ImagePanel extends JPanel {
 		this.imageLabel = new JLabel("", this.image, JLabel.CENTER);
 		add(imageLabel, BorderLayout.CENTER);
 		
+		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		
+		this.image = new ImageIcon((BufferedImage) arg1);
+		repaint();
 		
 	}
 	
