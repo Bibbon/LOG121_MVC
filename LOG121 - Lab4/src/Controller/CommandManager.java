@@ -52,4 +52,8 @@ public class CommandManager {
 	public void zoomOut(Perspective perspective, int x, int y){
 		storeAndExecute(new ZoomOutCommand(perspective, x, y));
 	}
+	
+	public void move(Perspective perspective, int xDist, int yDist){
+		storeAndExecute(new MoveCommand(perspective, xDist, yDist));
+	}
 }
