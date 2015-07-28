@@ -6,17 +6,17 @@ public class ZoomInCommand implements ViewCommand{
 
 	private Perspective perspective;
 	
-	private int minX;
-	private int minY;
-	private int maxX;
-	private int maxY;
+	private int x1;
+	private int y1;
+	private int x2;
+	private int y2;
 	private int centerX;
 	private int centerY;
 
-	private int newMinX;
-	private int newMinY;
-	private int newMaxX;
-	private int newMaxY;
+	private int newX1;
+	private int newY1;
+	private int newX2;
+	private int newY2;
 	private int newCenterX;
 	private int newCenterY;
 	
@@ -26,13 +26,13 @@ public class ZoomInCommand implements ViewCommand{
 		
 		this.perspective = perspective;
 
-		minX = perspective.getTopLeftCorner().x;
-		minY = perspective.getTopLeftCorner().y;
-		maxX = perspective.getBottomRightCorner().x;
-		maxY = perspective.getBottomRightCorner().y;
+		x1 = perspective.getVisibleX1();
+		y1 = perspective.getVisibleY1();
+		x2 = perspective.getVisibleX2();
+		y2 = perspective.getVisibleY2();
 		
-		centerX = maxX - minX;
-		centerY = maxY - minY;
+		centerX = x2 - x1;
+		centerY = y2 - y1;
 
 		newCenterX = centerX;
 		newCenterY = centerY;
@@ -44,13 +44,13 @@ public class ZoomInCommand implements ViewCommand{
 		
 		this.perspective = perspective;
 
-		minX = perspective.getTopLeftCorner().x;
-		minY = perspective.getTopLeftCorner().y;
-		maxX = perspective.getBottomRightCorner().x;
-		maxY = perspective.getBottomRightCorner().y;
+		x1 = perspective.getVisibleX1();
+		y1 = perspective.getVisibleY1();
+		x2 = perspective.getVisibleX2();
+		y2 = perspective.getVisibleY2();
 		
-		centerX = maxX - minX;
-		centerY = maxY - minY;
+		centerX = x2 - x1;
+		centerY = y2 - y1;
 		
 		newCenterX = x;
 		newCenterY = y;
@@ -60,20 +60,20 @@ public class ZoomInCommand implements ViewCommand{
 	
 	private void calculateNewPosition(){
 		
-		newMinX = newCenterX - ((centerX - minX)/SCALING_FACTOR);
-		newMinY = newCenterY - ((centerY - minY)/SCALING_FACTOR);
-		newMaxX = newCenterX + ((maxX - centerX)/SCALING_FACTOR);
-		newMaxY = newCenterY + ((maxY - centerY)/SCALING_FACTOR);
+		newX1 = newCenterX - ((centerX - x1)/SCALING_FACTOR);
+		newY1 = newCenterY - ((centerY - y1)/SCALING_FACTOR);
+		newX2 = newCenterX + ((x2 - centerX)/SCALING_FACTOR);
+		newY2 = newCenterY + ((y2 - centerY)/SCALING_FACTOR);
 		
 	}
 
 	public void execute(){
 		
-		perspective.setCoordinates(newMinX, newMinY, newMaxX, newMaxY);
+		perspective.setCoordinates(newX1, newY1, newX2, newY2);
 	}
 	
 	public void undo(){
 		
-		perspective.setCoordinates(minX, minY, maxX, maxY);
+		perspective.setCoordinates(x1, y1, x2, y2);
 	}
 }

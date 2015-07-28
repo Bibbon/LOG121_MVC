@@ -5,7 +5,7 @@ import Model.Perspective;
 
 public class CommandManager {
 
-	private CommandManager instance;
+	private static CommandManager instance;
 	private List<ViewCommand> history;
 	
 	private CommandManager(){
@@ -15,7 +15,7 @@ public class CommandManager {
 
 	}
 	
-	public CommandManager getInstance(){
+	public static CommandManager getInstance(){
 		if(instance == null) {
 			instance = new CommandManager();
 		}
@@ -54,6 +54,6 @@ public class CommandManager {
 	}
 	
 	public void move(Perspective perspective, int xDist, int yDist){
-		storeAndExecute(new MoveCommand(perspective, xDist, yDist));
+		//storeAndExecute(new MoveCommand(perspective, xDist, yDist));
 	}
 }
