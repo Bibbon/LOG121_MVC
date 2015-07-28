@@ -29,16 +29,20 @@ public class CommandManager {
 		cmd.execute();
 	}
 	
-	private ViewCommand getLastCommand (){
-		return this.history.get(history.size() - 1);
+	private ViewCommand removeLastCommand (){
+		if(!history.isEmpty())
+			return this.history.remove(history.size() - 1);
+		else
+			return null;
 	}
 	
-	private ViewCommand removeLastCommand (){
-		return this.history.remove(history.size() - 1);
+	public void undo(){
+		ViewCommand cmd = removeLastCommand();
+		if(cmd != null)
+			cmd.undo();
 	}
 	
 
-	
 	public void zoomIn(Perspective perspective){
 		storeAndExecute(new ZoomInCommand(perspective));
 	}
