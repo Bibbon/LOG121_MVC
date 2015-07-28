@@ -1,10 +1,8 @@
 package Controller;
 
 import java.awt.Component;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -74,8 +72,7 @@ public class Client {
 		// Memorise the title of a bouton
 		private String ButtonName;
 		private String viewSource;
-		private int translationY;
-		private int translationX;
+
 
 		public void actionPerformed(ActionEvent arg0) {
 
@@ -130,119 +127,55 @@ public class Client {
 			case ("ZoomIn"):
 
 				if (viewSource == "P1") {
-					int newImageWidth = perspective1.getVisibleImage()
-							.getWidth() * 2;
-					int newImageHeight = perspective1.getVisibleImage()
-							.getHeight() * 2;
-					BufferedImage resizedImage = new BufferedImage(
-							newImageWidth, newImageHeight, perspective1
-									.getVisibleImage().getType());
-					Graphics2D g = resizedImage.createGraphics();
-					g.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth,
-							newImageHeight, null);
-					g.dispose();
-					perspective1.setVisibleImage(resizedImage);
-					// CommandManager.getInstance().zoomIn(perspective1);
-				} else {
-					int newImageWidth = perspective2.getVisibleImage()
-							.getWidth() * 2;
-					int newImageHeight = perspective2.getVisibleImage()
-							.getHeight() * 2;
-					BufferedImage resizedImage = new BufferedImage(
-							newImageWidth, newImageHeight, perspective2
-									.getVisibleImage().getType());
-					Graphics2D g = resizedImage.createGraphics();
-					g.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth,
-							newImageHeight, null);
-					g.dispose();
-					perspective2.setVisibleImage(resizedImage);
-					// CommandManager.getInstance().zoomIn(perspective2);
+				CommandManager.getInstance().zoomIn(perspective1);
+				} 
+				else {
+				CommandManager.getInstance().zoomIn(perspective2);
 				}
-				System.out.println(ButtonName + " " + viewSource);
 				break;
+				
 			case ("ZoomOut"):
 
 				if (viewSource == "P1") {
-					int newImageWidth1 = perspective1.getVisibleImage()
-							.getWidth() / 2;
-					int newImageHeight1 = perspective1.getVisibleImage()
-							.getHeight() / 2;
-					BufferedImage resizedImage1 = new BufferedImage(
-							newImageWidth1, newImageHeight1, perspective1
-									.getVisibleImage().getType());
-					Graphics2D g1 = resizedImage1.createGraphics();
-					g1.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth1,
-							newImageHeight1, null);
-					g1.dispose();
-					perspective1.setVisibleImage(resizedImage1);
-					// CommandManager.getInstance().zoomIn(perspective1);
-				} else {
-					int newImageWidth1 = perspective2.getVisibleImage()
-							.getWidth() / 2;
-					int newImageHeight1 = perspective2.getVisibleImage()
-							.getHeight() / 2;
-					BufferedImage resizedImage1 = new BufferedImage(
-							newImageWidth1, newImageHeight1, perspective2
-									.getVisibleImage().getType());
-					Graphics2D g1 = resizedImage1.createGraphics();
-					g1.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth1,
-							newImageHeight1, null);
-					g1.dispose();
-					perspective2.setVisibleImage(resizedImage1);
-					// CommandManager.getInstance().zoomIn(perspective2);
+					 CommandManager.getInstance().zoomOut(perspective1);
+				} 
+				else {
+					 CommandManager.getInstance().zoomOut(perspective2);
 				}
-
-				System.out.println(ButtonName + " " + viewSource);
 				break;
-			case ("Up"):
 				
-		int newImageWidth = perspective1.getVisibleImage().getWidth();
-		int newImageHeight = perspective1.getVisibleImage().getHeight();
-		BufferedImage resizedImage = new BufferedImage(newImageWidth, newImageHeight, perspective1.getVisibleImage().getType());
-		Graphics2D g = resizedImage.createGraphics();
-		translationY -= 10;
-		g.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth,newImageHeight, null);
-		g.dispose();
-		perspective1.setVisibleImage(resizedImage);
-				/*
-				 * if(viewSource == "P1")
-				 * CommandManager.getInstance().move(perspective1, 0, 5); else
-				 * CommandManager.getInstance().move(perspective2, 0, 5);
-				 */
-				System.out.println(ButtonName + " " + viewSource);
+			
+			case ("Up"):			
+				
+				 if(viewSource == "P1")
+				 CommandManager.getInstance().moveUp(perspective1); 
+				 else
+				 CommandManager.getInstance().moveUp(perspective2);
+				 
 				break;
 			case ("Down"):
 				
-			int newImageWidth1 = perspective1.getVisibleImage().getWidth();
-			int newImageHeight1 = perspective1.getVisibleImage().getHeight();
-			BufferedImage resizedImage1 = new BufferedImage(newImageWidth1, newImageHeight1, perspective1.getVisibleImage().getType());
-			Graphics2D g1 = resizedImage1.createGraphics();
-			translationY += 10;
-			g1.drawImage(mainImage.getImage(), translationX, translationY, newImageWidth1,newImageHeight1, null);
-			g1.dispose();
-			perspective1.setVisibleImage(resizedImage1);
-				/*
-				 * if(viewSource == "P1")
-				 * CommandManager.getInstance().move(perspective1, 0, -5); else
-				 * CommandManager.getInstance().move(perspective2, 0, -5);
-				 */
-				System.out.println(ButtonName + " " + viewSource);
+				 if(viewSource == "P1")
+				 CommandManager.getInstance().moveDown(perspective1); 
+				 else
+				 CommandManager.getInstance().moveDown(perspective2);
+				 
 				break;
 			case ("Right"):
-				/*
-				 * if(viewSource == "P1")
-				 * CommandManager.getInstance().move(perspective1, 5, 0); else
-				 * CommandManager.getInstance().move(perspective2, 5, 0);
-				 */
-				System.out.println(ButtonName + " " + viewSource);
+				
+				 if(viewSource == "P1")
+				 CommandManager.getInstance().moveRight(perspective1); 
+				 else
+				 CommandManager.getInstance().moveRight(perspective2);
+				 
 				break;
 			case ("Left"):
-				/*
-				 * if(viewSource == "P1")
-				 * CommandManager.getInstance().move(perspective1, -5, 0); else
-				 * CommandManager.getInstance().move(perspective2, -5, 0);
-				 */
-				System.out.println(ButtonName + " " + viewSource);
+				
+				 if(viewSource == "P1")
+				 CommandManager.getInstance().moveLeft(perspective1); 
+				 else
+				 CommandManager.getInstance().moveLeft(perspective2);
+				 
 				break;
 
 			}

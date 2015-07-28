@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import Model.Perspective;
 
 
-public class ZoomOutCommand implements ViewCommand{
+public class MoveRightCommand implements ViewCommand{
 
 	private Perspective perspective;
 	
@@ -18,14 +18,14 @@ public class ZoomOutCommand implements ViewCommand{
 	private BufferedImage resizedImage;
 	private BufferedImage previousImage;
 	
-	private static final int SCALING_FACTOR = 2;
+	private static final int TRANSLATION_FACTOR = 10;
 	
-	public ZoomOutCommand(Perspective perspective){
+	public MoveRightCommand(Perspective perspective){
 		
 		this.perspective = perspective;
 	    previousImage = perspective.getVisibleImage();
-		newImageWidth = perspective.getVisibleImage().getWidth() / SCALING_FACTOR;
-		newImageHeight = perspective.getVisibleImage().getHeight() / SCALING_FACTOR;
+		newImageWidth = perspective.getVisibleImage().getWidth();
+		newImageHeight = perspective.getVisibleImage().getHeight();
 		resizedImage = new BufferedImage(newImageWidth, newImageHeight, perspective.getVisibleImage().getType());
 	}
 	
@@ -35,6 +35,7 @@ public class ZoomOutCommand implements ViewCommand{
 		
 		//perspective.setCoordinates(newX1, newY1, newX2, newY2);
 		Graphics2D g = resizedImage.createGraphics();
+		perspective.setTranslationX(perspective.getTranslationX() + TRANSLATION_FACTOR);
 		g.drawImage(perspective.getFullImage(), perspective.getTranslationX(), perspective.getTranslationY(), newImageWidth,newImageHeight, null);
 		g.dispose();
 		perspective.setVisibleImage(resizedImage);

@@ -1,7 +1,9 @@
 package Controller;
 
 import java.util.*;
+
 import Model.Perspective;
+import Model.Thumbnail;
 
 public class CommandManager {
 
@@ -41,19 +43,25 @@ public class CommandManager {
 		storeAndExecute(new ZoomInCommand(perspective));
 	}
 	
-	public void zoomIn(Perspective perspective, int x, int y){
-		storeAndExecute(new ZoomInCommand(perspective, x, y));
-	}
 	
 	public void zoomOut(Perspective perspective){
 		storeAndExecute(new ZoomOutCommand(perspective));
 	}
 	
-	public void zoomOut(Perspective perspective, int x, int y){
-		storeAndExecute(new ZoomOutCommand(perspective, x, y));
+	
+	public void moveUp(Perspective perspective){
+		storeAndExecute(new MoveUpCommand(perspective));
 	}
 	
-	public void move(Perspective perspective, int xDist, int yDist){
-		//storeAndExecute(new MoveCommand(perspective, xDist, yDist));
+	public void moveDown(Perspective perspective){
+		storeAndExecute(new MoveDownCommand(perspective));
+	}
+	
+	public void moveLeft(Perspective perspective){
+		storeAndExecute(new MoveLeftCommand(perspective));
+	}
+	
+	public void moveRight(Perspective perspective){
+		storeAndExecute(new MoveRightCommand(perspective));
 	}
 }

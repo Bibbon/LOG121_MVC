@@ -13,6 +13,9 @@ public class Perspective extends Observable implements Observer{
 	private int visibleX2;
 	private int visibleY2;
 	
+	private int translationX;
+	private int translationY;
+	
 	private BufferedImage fullImage;
 	private BufferedImage visibleImage;
 	
@@ -29,8 +32,32 @@ public class Perspective extends Observable implements Observer{
 		this.visibleY2 = 0;
 		this.fullImage = image;
 		this.visibleImage = image;
+		this.translationX = 0;
+		this.translationY = 0;
 	}
 	
+
+	public int getTranslationX() {
+		return translationX;
+	}
+
+
+
+	public void setTranslationX(int translationX) {
+		this.translationX = translationX;
+	}
+
+
+
+	public int getTranslationY() {
+		return translationY;
+	}
+
+
+
+	public void setTranslationY(int translationY) {
+		this.translationY = translationY;
+	}
 	
 
 	public int getVisibleX1() {
@@ -110,8 +137,24 @@ public class Perspective extends Observable implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		setVisibleImage((BufferedImage) arg1);
+		setFullImage((BufferedImage) arg1);
+		translationX = 0;
+		translationY = 0;
 		
 	}
+
+
+	public BufferedImage getFullImage() {
+		return fullImage;
+	}
+
+
+	public void setFullImage(BufferedImage fullImage) {
+		this.fullImage = fullImage;
+	}
+
+
+
 
 
 
