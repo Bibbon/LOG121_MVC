@@ -23,15 +23,15 @@ public class ButtonPanel extends JPanel{
 	private JPanel MovePanel;
 	private ViewListener viewListener;
 	
-	public ButtonPanel(ViewListener viewListener, String perspective){
+	public ButtonPanel(ViewListener viewListener){
 		
 		this.viewListener = viewListener;
-		this.ZoomIn = new JButton("ZoomIn " + perspective);
-		this.ZoomOut = new JButton("ZoomOut " + perspective);
-		this.Up = new JButton("Up " + perspective);
-		this.Down = new JButton("Down " + perspective);
-		this.Right = new JButton("Right " + perspective);
-		this.Left = new JButton("Left " + perspective);
+		this.ZoomIn = new JButton("ZoomIn");
+		this.ZoomOut = new JButton("ZoomOut");
+		this.Up = new JButton("Up");
+		this.Down = new JButton("Down");
+		this.Right = new JButton("Right");
+		this.Left = new JButton("Left");
 		ZoomIn.addActionListener(this.viewListener);
 		ZoomOut.addActionListener(this.viewListener);
 		Up.addActionListener(this.viewListener);

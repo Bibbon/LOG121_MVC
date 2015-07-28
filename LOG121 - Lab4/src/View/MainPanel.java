@@ -31,9 +31,11 @@ public class MainPanel extends JPanel{
 		setLayout(new BorderLayout());
 		this.PerspectiveView1 = new ImagePanel(image);
 		this.PerspectiveView2 = new ImagePanel(image);
+		PerspectiveView1.setName("P1");
+		PerspectiveView2.setName("P2");
 		this.ThumbnailView = new ImagePanel(image);
-		PerspectiveView1.add(new ButtonPanel(viewListener, "P1"), BorderLayout.NORTH);
-		PerspectiveView2.add(new ButtonPanel(viewListener, "P2"), BorderLayout.NORTH);
+		PerspectiveView1.add(new ButtonPanel(viewListener), BorderLayout.NORTH);
+		PerspectiveView2.add(new ButtonPanel(viewListener), BorderLayout.NORTH);
 		add(PerspectiveView1, BorderLayout.LINE_START);
 		add(PerspectiveView2, BorderLayout.LINE_END);
 		add(ThumbnailView, BorderLayout.PAGE_START);
