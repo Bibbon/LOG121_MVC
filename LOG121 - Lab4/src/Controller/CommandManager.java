@@ -54,6 +54,6 @@ public class CommandManager {
 	}
 	
 	public void move(Perspective perspective, int xDist, int yDist){
-		storeAndExecute(new MoveCommand(perspective, xDist, yDist));
+		//storeAndExecute(new MoveCommand(perspective, xDist, yDist));
 	}
 }
