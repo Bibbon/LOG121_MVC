@@ -1,11 +1,13 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +15,10 @@ import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel implements Observer {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8900636433772651027L;
 	private ImageIcon image;
 	private JLabel imageLabel;
 	
@@ -21,7 +27,8 @@ public class ImagePanel extends JPanel implements Observer {
 		this.image = new ImageIcon(image);
 		this.imageLabel = new JLabel("", this.image, JLabel.CENTER);
 		add(imageLabel, BorderLayout.CENTER);
-		
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setPreferredSize(new Dimension(500, 370));
 		
 	}
 	

@@ -10,8 +10,8 @@ public class CommandManager {
 	
 	private CommandManager(){
 
-		CommandManager instance = null;
-		List<ViewCommand> history = new ArrayList<ViewCommand>();
+		instance = null;
+		history = new ArrayList<ViewCommand>();
 
 	}
 	

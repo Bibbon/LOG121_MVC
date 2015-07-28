@@ -2,14 +2,10 @@ package View;
 
 
 import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import Controller.Client.ViewListener;
 
@@ -17,6 +13,10 @@ import Controller.Client.ViewListener;
 
 public class MainWindow extends JFrame
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8741213833516416543L;
 	private MainPanel mainPanel;
 	private MenuWindow menu;
 

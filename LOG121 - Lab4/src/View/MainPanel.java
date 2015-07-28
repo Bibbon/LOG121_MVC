@@ -1,14 +1,8 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 import Controller.Client.ViewListener;
@@ -20,6 +14,10 @@ public class MainPanel extends JPanel{
 
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2234748635800601645L;
 	private ImagePanel PerspectiveView1;
 	private ImagePanel PerspectiveView2;
 	private ImagePanel ThumbnailView;

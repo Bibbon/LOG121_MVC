@@ -1,9 +1,6 @@
 package View;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -13,10 +10,14 @@ import Controller.Client.ViewListener;
 public class MenuWindow extends JMenuBar
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7803200599536495553L;
 	JMenu menuFile = new JMenu("File");
 	JMenuItem fileOpenImage = new JMenuItem("Open Image");
 	JMenuItem fileOpenProject = new JMenuItem("Open Project");
-	JMenuItem fileSave = new JMenuItem("Save");
+	JMenuItem fileSave = new JMenuItem("Save All");
 		
 	JMenu menuZoom = new JMenu("Zoom");
 	JMenuItem zoomIn = new JMenuItem("Zoom In");

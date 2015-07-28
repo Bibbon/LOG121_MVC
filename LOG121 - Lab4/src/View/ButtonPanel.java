@@ -1,19 +1,22 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicButtonListener;
 
-import Controller.Client;
+
+
 import Controller.Client.ViewListener;
 
 
 public class ButtonPanel extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7434881839375306248L;
 	private JButton ZoomIn;
 	private JButton ZoomOut;
 	private JButton Up;
