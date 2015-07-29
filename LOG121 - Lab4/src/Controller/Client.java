@@ -174,23 +174,26 @@ public class Client {
 			case ("Undo"):
 				CommandManager.getInstance().undo();
 				break;
+			case ("Redo"):
+				CommandManager.getInstance().redo();
+				break;
 			case ("ZoomIn"):
 
 				if (viewSource == "P1") {
-				CommandManager.getInstance().zoomIn(perspective1);
+					CommandInvoker.zoomIn(perspective1);
 				} 
 				else {
-				CommandManager.getInstance().zoomIn(perspective2);
+					CommandInvoker.zoomIn(perspective2);
 				}
 				break;
 				
 			case ("ZoomOut"):
 
 				if (viewSource == "P1") {
-					 CommandManager.getInstance().zoomOut(perspective1);
+					CommandInvoker.zoomOut(perspective1);
 				} 
 				else {
-					 CommandManager.getInstance().zoomOut(perspective2);
+					CommandInvoker.zoomOut(perspective2);
 				}
 				break;
 				
@@ -198,33 +201,33 @@ public class Client {
 			case ("Up"):			
 				
 				 if(viewSource == "P1")
-				 CommandManager.getInstance().moveUp(perspective1); 
+					 CommandInvoker.moveUp(perspective1); 
 				 else
-				 CommandManager.getInstance().moveUp(perspective2);
+					 CommandInvoker.moveUp(perspective2);
 				 
 				break;
 			case ("Down"):
 				
 				 if(viewSource == "P1")
-				 CommandManager.getInstance().moveDown(perspective1); 
+					 CommandInvoker.moveDown(perspective1); 
 				 else
-				 CommandManager.getInstance().moveDown(perspective2);
+					 CommandInvoker.moveDown(perspective2);
 				 
 				break;
 			case ("Right"):
 				
 				 if(viewSource == "P1")
-				 CommandManager.getInstance().moveRight(perspective1); 
+					 CommandInvoker.moveRight(perspective1); 
 				 else
-				 CommandManager.getInstance().moveRight(perspective2);
+					 CommandInvoker.moveRight(perspective2);
 				 
 				break;
 			case ("Left"):
 				
 				 if(viewSource == "P1")
-				 CommandManager.getInstance().moveLeft(perspective1); 
+					 CommandInvoker.moveLeft(perspective1); 
 				 else
-				 CommandManager.getInstance().moveLeft(perspective2);
+					 CommandInvoker.moveLeft(perspective2);
 				 
 				break;
 

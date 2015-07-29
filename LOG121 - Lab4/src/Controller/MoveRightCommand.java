@@ -42,7 +42,12 @@ public class MoveRightCommand implements ViewCommand{
 	}
 	
 	public void undo(){
-		
 		perspective.setVisibleImage(previousImage);
+		perspective.setTranslationX(perspective.getTranslationX() - TRANSLATION_FACTOR);
+	}
+	
+	public void redo(){
+		perspective.setVisibleImage(resizedImage);
+		perspective.setTranslationX(perspective.getTranslationX() + TRANSLATION_FACTOR);
 	}
 }

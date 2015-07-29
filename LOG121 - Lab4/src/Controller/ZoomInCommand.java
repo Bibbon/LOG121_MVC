@@ -33,7 +33,6 @@ public class ZoomInCommand implements ViewCommand{
 
 	public void execute(){
 		
-		//perspective.setCoordinates(newX1, newY1, newX2, newY2);
 		Graphics2D g = resizedImage.createGraphics();
 		g.drawImage(perspective.getFullImage(), perspective.getTranslationX(), perspective.getTranslationY(), newImageWidth,newImageHeight, null);
 		g.dispose();
@@ -41,7 +40,10 @@ public class ZoomInCommand implements ViewCommand{
 	}
 	
 	public void undo(){
-		
 		perspective.setVisibleImage(previousImage);
+	}
+	
+	public void redo(){
+		perspective.setVisibleImage(resizedImage);
 	}
 }
