@@ -3,7 +3,6 @@ package Controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -76,6 +75,9 @@ public class Client {
 		// Memorise the title of a bouton
 		private String ButtonName;
 		private String viewSource;
+		private Perspective newProjectPerspective1;
+		private Perspective newProjectPerspective2;
+		private Thumbnail newProjectMainImage;
 
 
 		public void actionPerformed(ActionEvent arg0) {
@@ -125,21 +127,10 @@ public class Client {
 				FileInputStream in = new FileInputStream(projectSelector2.getprojectFile().getAbsolutePath());
 				ObjectInputStream ObIn = new ObjectInputStream(in);
 				
-				Thumbnail newProjectMainImage = (Thumbnail) ObIn.readObject();
-				Perspective newProjectPerspective1 = (Perspective) ObIn.readObject();
-				Perspective newProjectPerspective2 = (Perspective) ObIn.readObject();
+				newProjectMainImage = (Thumbnail) ObIn.readObject();
+				newProjectPerspective1 = (Perspective) ObIn.readObject();
+				newProjectPerspective2 = (Perspective) ObIn.readObject();
 				ObIn.close();
-				
-				mainImage.setImage(newProjectMainImage.getImage());
-				perspective1.setFullImage(newProjectPerspective1.getFullImage());
-				perspective2.setFullImage(newProjectPerspective2.getFullImage());
-				perspective1.setTranslationX(newProjectPerspective1.getTranslationX());
-				perspective1.setTranslationY(newProjectPerspective1.getTranslationY());
-				perspective2.setTranslationX(newProjectPerspective2.getTranslationX());
-				perspective2.setTranslationY(newProjectPerspective2.getTranslationY());
-				perspective1.setVisibleImage(newProjectPerspective1.getVisibleImage());
-				perspective2.setVisibleImage(newProjectPerspective2.getVisibleImage());
-				CommandManager.getInstance().
 				
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(null, "Could not read file");
@@ -147,8 +138,14 @@ public class Client {
 				JOptionPane.showMessageDialog(null, "Unknown class found");
 			}
 		    
-
-			
+			mainImage.setImage(newProjectMainImage.getImage());
+			perspective1.setTranslationX(newProjectPerspective1.getTranslationX());
+			perspective1.setTranslationY(newProjectPerspective1.getTranslationY());
+			perspective2.setTranslationX(newProjectPerspective2.getTranslationX());
+			perspective2.setTranslationY(newProjectPerspective2.getTranslationY());
+			perspective1.setVisibleImage(newProjectPerspective1.getVisibleImage());
+			perspective2.setVisibleImage(newProjectPerspective2.getVisibleImage());
+			CommandManager.getInstance().clearStacks();
 			    break;
 			case ("Save"):
 

@@ -13,7 +13,7 @@ public class MenuWindow extends JMenuBar
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7803200599536495553L;
+	private static final long serialVersionUID = 502896813583984078L;
 	JMenu menuFile = new JMenu("File");
 	JMenuItem fileOpenImage = new JMenuItem("Open Image");
 	JMenuItem fileOpenProject = new JMenuItem("Open Project");

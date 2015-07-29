@@ -18,7 +18,7 @@ public class ImagePanel extends JPanel implements Observer {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8900636433772651027L;
+	private static final long serialVersionUID = 502896813583984078L;
 	private ImageIcon image;
 	private JLabel imageLabel;
 	

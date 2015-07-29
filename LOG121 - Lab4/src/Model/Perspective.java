@@ -166,12 +166,16 @@ public class Perspective extends Observable implements Observer, Serializable{
 	private void readObject(ObjectInputStream ois) throws IOException{
 		visibleImage = ImageIO.read(ois);
 		fullImage = ImageIO.read(ois);
+		translationX = ois.read();
+		translationY = ois.read();
 	}
 	
 	private void writeObject(ObjectOutputStream oos) throws IOException{
 		ImageIO.write(visibleImage, "PNG", oos);
 		ImageIO.write(fullImage, "PNG", oos);
-	}
+		oos.write(translationX);
+		oos.write(translationY);
+}
 
 
 

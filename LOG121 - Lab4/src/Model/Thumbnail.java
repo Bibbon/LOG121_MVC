@@ -13,7 +13,7 @@ public class Thumbnail extends Observable implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1472879046945090487L;
+	private static final long serialVersionUID = 502896813583984078L;
 	private BufferedImage image;
 	
 	

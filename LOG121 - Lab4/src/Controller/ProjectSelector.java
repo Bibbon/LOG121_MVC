@@ -1,10 +1,7 @@
 package Controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -22,7 +19,7 @@ public class ProjectSelector {
 	public ProjectSelector(){
 		this.projectChooser = new JFileChooser();
 		this.projectFilter = new FileNameExtensionFilter(EXTENSION_TYPE, EXTENTION);
-		this.projectChooser.setFileFilter(projectFilter);
+		//this.projectChooser.setFileFilter(projectFilter);
 	}
 
 
