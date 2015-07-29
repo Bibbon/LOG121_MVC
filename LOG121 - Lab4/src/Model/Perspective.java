@@ -1,10 +1,20 @@
 package Model;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
-public class Perspective extends Observable implements Observer{
+import javax.imageio.ImageIO;
 
+public class Perspective extends Observable implements Observer, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 502896813583984078L;
 	private int fullHeight;
 	private int fullWidth;
 	
@@ -151,6 +161,16 @@ public class Perspective extends Observable implements Observer{
 
 	public void setFullImage(BufferedImage fullImage) {
 		this.fullImage = fullImage;
+	}
+	
+	private void readObject(ObjectInputStream ois) throws IOException{
+		visibleImage = ImageIO.read(ois);
+		fullImage = ImageIO.read(ois);
+	}
+	
+	private void writeObject(ObjectOutputStream oos) throws IOException{
+		ImageIO.write(visibleImage, "PNG", oos);
+		ImageIO.write(fullImage, "PNG", oos);
 	}
 
 

@@ -3,10 +3,17 @@ package Controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import Model.Perspective;
 import Model.Thumbnail;
@@ -25,12 +32,9 @@ public class Client {
 		mainImage = new Thumbnail(imageSelector.getBufferedImage());
 		perspective1 = new Perspective(imageSelector.getBufferedImage());
 		perspective2 = new Perspective(imageSelector.getBufferedImage());
-		mainWindow = new MainWindow(imageSelector.getBufferedImage(),
-				new ViewListener());
-		perspective1.addObserver(mainWindow.getMainPanel()
-				.getPerspectiveView1());
-		perspective2.addObserver(mainWindow.getMainPanel()
-				.getPerspectiveView2());
+		mainWindow = new MainWindow(imageSelector.getBufferedImage(),new ViewListener());
+		perspective1.addObserver(mainWindow.getMainPanel().getPerspectiveView1());
+		perspective2.addObserver(mainWindow.getMainPanel().getPerspectiveView2());
 		mainImage.addObserver(mainWindow.getMainPanel().getThumbnailView());
 		mainImage.addObserver(perspective1);
 		mainImage.addObserver(perspective2);
@@ -96,8 +100,55 @@ public class Client {
 				mainImage.setImage(iS.getBufferedImage());
 				break;
 			case ("Save All"):
+				ProjectSelector projectSelector = new ProjectSelector();
+			    projectSelector.SaveProject();
+			    try {
+					FileOutputStream out = new FileOutputStream(projectSelector.getprojectFile());
+					ObjectOutputStream ObOut = new ObjectOutputStream(out);
+					
+					ObOut.writeObject(mainImage);
+					ObOut.writeObject(perspective1);
+					ObOut.writeObject(perspective2);
+					ObOut.close();
+					
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showMessageDialog(null, "File not found");
+				} catch (IOException e) {
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Could not write file");;
+				}
 				break;
 			case ("Open Project"):
+				ProjectSelector projectSelector2 = new ProjectSelector();
+		    projectSelector2.LoadProject();
+		    try {
+				FileInputStream in = new FileInputStream(projectSelector2.getprojectFile().getAbsolutePath());
+				ObjectInputStream ObIn = new ObjectInputStream(in);
+				
+				Thumbnail newProjectMainImage = (Thumbnail) ObIn.readObject();
+				Perspective newProjectPerspective1 = (Perspective) ObIn.readObject();
+				Perspective newProjectPerspective2 = (Perspective) ObIn.readObject();
+				ObIn.close();
+				
+				mainImage.setImage(newProjectMainImage.getImage());
+				perspective1.setFullImage(newProjectPerspective1.getFullImage());
+				perspective2.setFullImage(newProjectPerspective2.getFullImage());
+				perspective1.setTranslationX(newProjectPerspective1.getTranslationX());
+				perspective1.setTranslationY(newProjectPerspective1.getTranslationY());
+				perspective2.setTranslationX(newProjectPerspective2.getTranslationX());
+				perspective2.setTranslationY(newProjectPerspective2.getTranslationY());
+				perspective1.setVisibleImage(newProjectPerspective1.getVisibleImage());
+				perspective2.setVisibleImage(newProjectPerspective2.getVisibleImage());
+				CommandManager.getInstance().
+				
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Could not read file");
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(null, "Unknown class found");
+			}
+		    
+
+			
 			    break;
 			case ("Save"):
 
