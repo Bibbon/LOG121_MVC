@@ -4,114 +4,54 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 
 public class Perspective extends Observable implements Observer{
-
-	private int fullHeight;
-	private int fullWidth;
 	
-	private int visibleX1;
-	private int visibleY1;
-	private int visibleX2;
-	private int visibleY2;
-	
+	//Facteurs de translation appliqués à l'image dans la perspective
 	private int translationX;
 	private int translationY;
 	
+	//Image principale
 	private BufferedImage fullImage;
+	//Portion de l'image visible à l'écran
 	private BufferedImage visibleImage;
 	
 	
 	
 	public Perspective(BufferedImage image) {
 		super();
-		this.fullHeight = image.getHeight();
-		this.fullWidth = image.getWidth();
 		
-		this.visibleX1 = 0;
-		this.visibleY1 = 0;
-		this.visibleX2 = 0;
-		this.visibleY2 = 0;
 		this.fullImage = image;
 		this.visibleImage = image;
 		this.translationX = 0;
 		this.translationY = 0;
 	}
 	
-
 	public int getTranslationX() {
 		return translationX;
 	}
-
-
 
 	public void setTranslationX(int translationX) {
 		this.translationX = translationX;
 	}
 
-
-
 	public int getTranslationY() {
 		return translationY;
 	}
 
-
-
 	public void setTranslationY(int translationY) {
 		this.translationY = translationY;
 	}
-	
 
-	public int getVisibleX1() {
-		return visibleX1;
+	public BufferedImage getFullImage() {
+		return fullImage;
 	}
 
-
-
-	public void setVisibleX1(int visibleX1) {
-		this.visibleX1 = visibleX1;
+	public void setFullImage(BufferedImage fullImage) {
+		this.fullImage = fullImage;
 	}
-
-
-
-	public int getVisibleY1() {
-		return visibleY1;
-	}
-
-
-
-	public void setVisibleY1(int visibleY1) {
-		this.visibleY1 = visibleY1;
-	}
-
-
-
-	public int getVisibleX2() {
-		return visibleX2;
-	}
-
-
-
-	public void setVisibleX2(int visibleX2) {
-		this.visibleX2 = visibleX2;
-	}
-
-
-
-	public int getVisibleY2() {
-		return visibleY2;
-	}
-
-
-
-	public void setVisibleY2(int visibleY2) {
-		this.visibleY2 = visibleY2;
-	}
-	
 	
 	public BufferedImage getVisibleImage() {
 		return visibleImage;
 	}
-
-
 
 	public void setVisibleImage(BufferedImage visibleImage) {
 		this.visibleImage = visibleImage;
@@ -120,45 +60,14 @@ public class Perspective extends Observable implements Observer{
 	}
 
 
-
-	public void setCoordinates(int minX, int minY, int maxX, int maxY) {
-		
-		this.visibleX1 = (minX >= 0) ? minX: 0;
-		this.visibleY1 = (minY >= 0) ? minY: 0;
-		this.visibleX2 = (maxX <= fullWidth) ? maxX: fullWidth;
-		this.visibleY2 = (maxY <= fullHeight) ? maxY: fullHeight;
-		
-		setVisibleImage(fullImage.getSubimage(minX, minY, maxX - minX, maxY - minY));	
-		
-	}
-
-
-
 	@Override
 	public void update(Observable arg0, Object arg1) {
+		//Sert à updater l'image dans la perspective lorsqu'on change d'image principale
 		setVisibleImage((BufferedImage) arg1);
 		setFullImage((BufferedImage) arg1);
 		translationX = 0;
 		translationY = 0;
 		
 	}
-
-
-	public BufferedImage getFullImage() {
-		return fullImage;
-	}
-
-
-	public void setFullImage(BufferedImage fullImage) {
-		this.fullImage = fullImage;
-	}
-
-
-
-
-
-
-
-	
 	
 }

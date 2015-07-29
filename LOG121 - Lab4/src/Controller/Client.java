@@ -14,14 +14,18 @@ import View.MainWindow;
 
 public class Client {
 
+	private Thumbnail mainImage;
 	private Perspective perspective1;
 	private Perspective perspective2;
-	private Thumbnail mainImage;
+	
 	private MainWindow mainWindow;
+	
 	private ImageSelector imageSelector;
 
 	public Client() {
+		//File chooser
 		imageSelector = new ImageSelector();
+		//Création de l'interface
 		mainImage = new Thumbnail(imageSelector.getBufferedImage());
 		perspective1 = new Perspective(imageSelector.getBufferedImage());
 		perspective2 = new Perspective(imageSelector.getBufferedImage());
@@ -31,6 +35,7 @@ public class Client {
 				.getPerspectiveView1());
 		perspective2.addObserver(mainWindow.getMainPanel()
 				.getPerspectiveView2());
+		//Ajout des Observers
 		mainImage.addObserver(mainWindow.getMainPanel().getThumbnailView());
 		mainImage.addObserver(perspective1);
 		mainImage.addObserver(perspective2);
@@ -62,43 +67,50 @@ public class Client {
 	}
 
 	public static void main(String[] args) {
+		
 		Client client = new Client();
+		
 		client.getClass();
 
 	}
 
+	//Contient tous les Listeners associés à l'interface
 	public class ViewListener implements ActionListener {
 
-		// Memorise the title of a bouton
-		private String ButtonName;
+		private String buttonName;
 		private String viewSource;
 
 
 		public void actionPerformed(ActionEvent arg0) {
 
-			// Memorise the value of the click button
-			ButtonName = arg0.getActionCommand();
+			// Mémorise le nom du button
+			buttonName = arg0.getActionCommand();
 
 
-			// If Direction button, need to go further
-			if (ButtonName == "Up" || ButtonName == "Down"
-					|| ButtonName == "Left" || ButtonName == "Right")
+			// S'il s'agit d'un bouton de contrôle, trouve le nom de la perspective associée
+			if (buttonName == "Up" || buttonName == "Down"
+					|| buttonName == "Left" || buttonName == "Right")
 				viewSource = (String) ((Component) arg0.getSource())
 						.getParent().getParent().getParent().getName();
-			else if (ButtonName == "ZoomIn" || ButtonName == "ZoomOut"
-					|| ButtonName == "Save")
+			else if (buttonName == "ZoomIn" || buttonName == "ZoomOut"
+					|| buttonName == "Save")
 				viewSource = (String) ((Component) arg0.getSource())
 						.getParent().getParent().getName();
 
-			switch (ButtonName) {
+			//Actions associées à chaque bouton
+			switch (buttonName) {
+			
 			case ("Open Image"):
 				ImageSelector iS = new ImageSelector();
 				mainImage.setImage(iS.getBufferedImage());
 				break;
+			
 			case ("Save All"):
 				break;
+			
 			case ("Open Project"):
 			    break;
+			
 			case ("Save"):
 
 				imageSelector.SaveImage();
@@ -120,12 +132,15 @@ public class Client {
 					}
 
 				}
+			
 			case ("Undo"):
 				CommandManager.getInstance().undo();
 				break;
+			
 			case ("Redo"):
 				CommandManager.getInstance().redo();
 				break;
+			
 			case ("ZoomIn"):
 
 				if (viewSource == "P1") {
@@ -146,7 +161,6 @@ public class Client {
 				}
 				break;
 				
-			
 			case ("Up"):			
 				
 				 if(viewSource == "P1")
@@ -155,6 +169,7 @@ public class Client {
 					 CommandInvoker.moveUp(perspective2);
 				 
 				break;
+			
 			case ("Down"):
 				
 				 if(viewSource == "P1")
@@ -163,6 +178,7 @@ public class Client {
 					 CommandInvoker.moveDown(perspective2);
 				 
 				break;
+			
 			case ("Right"):
 				
 				 if(viewSource == "P1")
@@ -171,6 +187,7 @@ public class Client {
 					 CommandInvoker.moveRight(perspective2);
 				 
 				break;
+			
 			case ("Left"):
 				
 				 if(viewSource == "P1")
@@ -181,10 +198,6 @@ public class Client {
 				break;
 
 			}
-
-			// END actionPerformed()
 		}
-
 	}
-
 }

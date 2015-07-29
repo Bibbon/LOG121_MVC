@@ -9,15 +9,17 @@ import Model.Perspective;
 public class MoveLeftCommand implements ViewCommand{
 
 	private Perspective perspective;
-	
 
-
+	//Dimensions de la nouvelle image
 	private int newImageWidth;
 	private int newImageHeight;
-	 
-	private BufferedImage resizedImage;
-	private BufferedImage previousImage;
 	
+	//État de l'image avant la modification
+	private BufferedImage previousImage;
+	//État de l'image après la modification
+	private BufferedImage newImage;
+	
+	//Distance d'un déplacement
 	private static final int TRANSLATION_FACTOR = 10;
 	
 	public MoveLeftCommand(Perspective perspective){
@@ -26,29 +28,29 @@ public class MoveLeftCommand implements ViewCommand{
 	    previousImage = perspective.getVisibleImage();
 		newImageWidth = perspective.getVisibleImage().getWidth();
 		newImageHeight = perspective.getVisibleImage().getHeight();
-		resizedImage = new BufferedImage(newImageWidth, newImageHeight, perspective.getVisibleImage().getType());
+		newImage = new BufferedImage(newImageWidth, newImageHeight, perspective.getVisibleImage().getType());
 	}
 	
-	
-
 	public void execute(){
 		
-		//perspective.setCoordinates(newX1, newY1, newX2, newY2);
-		Graphics2D g = resizedImage.createGraphics();
+		Graphics2D g = newImage.createGraphics();
 		perspective.setTranslationX(perspective.getTranslationX() - TRANSLATION_FACTOR);
 		g.drawImage(perspective.getFullImage(), perspective.getTranslationX(), perspective.getTranslationY(), newImageWidth,newImageHeight, null);
 		g.dispose();
-		perspective.setVisibleImage(resizedImage);
+		perspective.setVisibleImage(newImage);
 	}
 	
 	public void undo(){
-		
+		//Set de l'image à sa valeur précédente
 		perspective.setVisibleImage(previousImage);
+		//Mise à jour de la distance par rapport à l'image centrée
 		perspective.setTranslationX(perspective.getTranslationX() + TRANSLATION_FACTOR);
 	}
 	
 	public void redo(){
-		perspective.setVisibleImage(resizedImage);
+		//Set de l'image à sa valeur calculée
+		perspective.setVisibleImage(newImage);
+		//Mise à jour de la distance par rapport à l'image centrée
 		perspective.setTranslationX(perspective.getTranslationX() - TRANSLATION_FACTOR);
 	}
 }
