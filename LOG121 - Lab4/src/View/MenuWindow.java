@@ -1,3 +1,22 @@
+/******************************************************
+Cours:   LOG121
+Session: E2015
+Groupe:  02
+Projet: Laboratoire #4
+Étudiant(e)s:	Anthony Garneau
+				Simon Larouche-Gagné
+              	Pierre-Luc Cusson
+              
+Professeur : 	Francis Cardinal
+Nom du fichier: MenuWindow.java
+Date créé: 2015-07-25
+Date dern. modif. 2015-07-28
+ *******************************************************
+Historique des modifications
+ *******************************************************
+L'historique des modification est disponible sur github
+ *******************************************************/
+
 package View;
 
 import javax.swing.JMenu;
@@ -20,7 +39,6 @@ public class MenuWindow extends JMenuBar {
 	JMenuItem zoomOut = new JMenuItem("Zoom Out");
 
 	JMenu menuAction = new JMenu("Action");
-	JMenuItem actionNewThumbnail = new JMenuItem("New Thumbnail");
 	JMenuItem actionUndo = new JMenuItem("Undo");
 	JMenuItem actionRedo = new JMenuItem("Redo");
 
@@ -43,8 +61,6 @@ public class MenuWindow extends JMenuBar {
 		fileSave.addActionListener(viewListener);
 		menuFile.add(fileSave);
 		add(menuFile);
-		actionNewThumbnail.addActionListener(viewListener);
-		menuAction.add(actionNewThumbnail);
 		actionUndo.addActionListener(viewListener);
 		menuAction.add(actionUndo);
 		actionRedo.addActionListener(viewListener);
