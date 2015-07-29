@@ -2,20 +2,13 @@ package View;
 
 import java.awt.BorderLayout;
 
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-
-
 import Controller.Client.ViewListener;
 
+public class ButtonPanel extends JPanel {
 
-public class ButtonPanel extends JPanel{
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 502896813583984078L;
 	private JButton ZoomIn;
 	private JButton ZoomOut;
@@ -26,9 +19,9 @@ public class ButtonPanel extends JPanel{
 	private JButton Save;
 	private JPanel MovePanel;
 	private ViewListener viewListener;
-	
-	public ButtonPanel(ViewListener viewListener){
-		
+
+	public ButtonPanel(ViewListener viewListener) {
+
 		this.viewListener = viewListener;
 		this.ZoomIn = new JButton("ZoomIn");
 		this.ZoomOut = new JButton("ZoomOut");
@@ -45,15 +38,15 @@ public class ButtonPanel extends JPanel{
 		Left.addActionListener(this.viewListener);
 		Right.addActionListener(this.viewListener);
 		this.MovePanel = new JPanel(new BorderLayout());
-		MovePanel.add(Up,BorderLayout.NORTH);
-		MovePanel.add(Down,BorderLayout.CENTER);
-		MovePanel.add(Left,BorderLayout.WEST);
-		MovePanel.add(Right,BorderLayout.EAST);
+		MovePanel.add(Up, BorderLayout.NORTH);
+		MovePanel.add(Down, BorderLayout.CENTER);
+		MovePanel.add(Left, BorderLayout.WEST);
+		MovePanel.add(Right, BorderLayout.EAST);
 		add(Save);
 		add(ZoomIn);
 		add(ZoomOut);
-		add(MovePanel);	
-		
+		add(MovePanel);
+
 	}
 
 	public ViewListener getViewListener() {

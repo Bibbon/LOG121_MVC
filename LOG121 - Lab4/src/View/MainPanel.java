@@ -7,25 +7,14 @@ import javax.swing.JPanel;
 
 import Controller.Client.ViewListener;
 
+public class MainPanel extends JPanel {
 
-
-public class MainPanel extends JPanel{
-
-
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 502896813583984078L;
 	private ImagePanel PerspectiveView1;
 	private ImagePanel PerspectiveView2;
 	private ImagePanel ThumbnailView;
-	
-	/*
-	 * constructor
-	 */
-	public MainPanel(BufferedImage image, ViewListener viewListener){
+
+	public MainPanel(BufferedImage image, ViewListener viewListener) {
 		setLayout(new BorderLayout());
 		this.PerspectiveView1 = new ImagePanel(image);
 		this.PerspectiveView2 = new ImagePanel(image);
@@ -62,5 +51,5 @@ public class MainPanel extends JPanel{
 	public void setThumbnailView(ImagePanel thumbnailView) {
 		ThumbnailView = thumbnailView;
 	}
-	
+
 }

@@ -9,17 +9,15 @@ import java.util.Observable;
 
 import javax.imageio.ImageIO;
 
-public class Thumbnail extends Observable implements Serializable{
-	/**
-	 * 
-	 */
+public class Thumbnail extends Observable implements Serializable {
+
 	private static final long serialVersionUID = 502896813583984078L;
+
+	// Image principale de l'application
 	private BufferedImage image;
-	
-	
-	
-	
-	public Thumbnail(BufferedImage image){
+
+	// Créateur
+	public Thumbnail(BufferedImage image) {
 		this.image = image;
 	}
 
@@ -32,14 +30,15 @@ public class Thumbnail extends Observable implements Serializable{
 		setChanged();
 		notifyObservers(image);
 	}
-	
-	private void readObject(ObjectInputStream ois) throws IOException{
+
+	// Récupération de la sauvegarde
+	private void readObject(ObjectInputStream ois) throws IOException {
 		image = ImageIO.read(ois);
 	}
-	
-	private void writeObject(ObjectOutputStream oos) throws IOException{
+
+	// Sauvegarde
+	private void writeObject(ObjectOutputStream oos) throws IOException {
 		ImageIO.write(image, "PNG", oos);
 	}
-
 
 }

@@ -7,37 +7,33 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
-
-
 import javax.imageio.ImageIO;
 
-public class Perspective extends Observable implements Observer, Serializable{
+public class Perspective extends Observable implements Observer, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 502896813583984078L;
-	
-	//Facteurs de translation appliqués à l'image dans la perspective
+
+	// Facteurs de translation appliqués à l'image dans la perspective
 	private int translationX;
 	private int translationY;
-	
-	//Image principale
+
+	// Image principale
 	private BufferedImage fullImage;
-	//Portion de l'image visible à l'écran
+	// Portion de l'image visible à l'écran
 	private BufferedImage visibleImage;
-	
-	
-	
+
 	public Perspective(BufferedImage image) {
 		super();
-		
+
 		this.fullImage = image;
+		// L'image affichée à la création est l'image entière
 		this.visibleImage = image;
+
+		// L'image est centrée à la création
 		this.translationX = 0;
 		this.translationY = 0;
 	}
-	
+
 	public int getTranslationX() {
 		return translationX;
 	}
@@ -61,7 +57,7 @@ public class Perspective extends Observable implements Observer, Serializable{
 	public void setFullImage(BufferedImage fullImage) {
 		this.fullImage = fullImage;
 	}
-	
+
 	public BufferedImage getVisibleImage() {
 		return visibleImage;
 	}
@@ -72,38 +68,30 @@ public class Perspective extends Observable implements Observer, Serializable{
 		notifyObservers(this.visibleImage);
 	}
 
-
 	@Override
+	// Sert à updater l'image dans la perspective lorsqu'on change d'image
+	// principale
 	public void update(Observable arg0, Object arg1) {
-		//Sert à updater l'image dans la perspective lorsqu'on change d'image principale
 		setVisibleImage((BufferedImage) arg1);
 		setFullImage((BufferedImage) arg1);
 		translationX = 0;
 		translationY = 0;
-		
 	}
 
-
-	
-	private void readObject(ObjectInputStream ois) throws IOException{
+	// Récupération de la sauvegarde
+	private void readObject(ObjectInputStream ois) throws IOException {
 		visibleImage = ImageIO.read(ois);
 		fullImage = ImageIO.read(ois);
 		translationX = ois.read();
 		translationY = ois.read();
 	}
-	
-	private void writeObject(ObjectOutputStream oos) throws IOException{
+
+	// Sauvegarde
+	private void writeObject(ObjectOutputStream oos) throws IOException {
 		ImageIO.write(visibleImage, "PNG", oos);
 		ImageIO.write(fullImage, "PNG", oos);
 		oos.write(translationX);
 		oos.write(translationY);
-}
+	}
 
-
-
-
-
-
-
-	
 }
