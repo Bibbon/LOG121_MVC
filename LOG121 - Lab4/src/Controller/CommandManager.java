@@ -48,6 +48,11 @@ public class CommandManager {
 		
 	}
 	
+	public void clearStacks(){
+		commandStack.clear();
+		redoStack.clear();
+	}
+	
 	public void redo(){
 		
 		if(!redoStack.isEmpty()){

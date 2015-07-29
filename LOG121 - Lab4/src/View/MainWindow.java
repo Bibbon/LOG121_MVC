@@ -16,7 +16,7 @@ public class MainWindow extends JFrame
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8741213833516416543L;
+	private static final long serialVersionUID = 502896813583984078L;
 	private MainPanel mainPanel;
 	private MenuWindow menu;
 

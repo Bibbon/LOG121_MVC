@@ -16,7 +16,7 @@ public class ButtonPanel extends JPanel{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7434881839375306248L;
+	private static final long serialVersionUID = 502896813583984078L;
 	private JButton ZoomIn;
 	private JButton ZoomOut;
 	private JButton Up;

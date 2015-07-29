@@ -17,7 +17,7 @@ public class MainPanel extends JPanel{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2234748635800601645L;
+	private static final long serialVersionUID = 502896813583984078L;
 	private ImagePanel PerspectiveView1;
 	private ImagePanel PerspectiveView2;
 	private ImagePanel ThumbnailView;
